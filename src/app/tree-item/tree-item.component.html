@@ -1,0 +1,30 @@
+<ul *ngFor="let child of children; let i = index">
+    <li>
+      <!-- Display item and add or delete child item section -->
+      <div class="action" *ngIf="child.name" [ngClass]="child.type">
+        {{child.name}}
+
+        <button *ngIf="child.type !== 'file'" class="btn black round small" (click)="addChild(child)">&#10010;</button>
+        <button class="btn white round small" (click)="deleteChild(children, i)">&#45;</button>
+      </div>
+
+      <!-- This is for file/folder selection buttons while adding in child -->
+      <div *ngIf="child.type === 'unset'">
+        <button (click)="child.type = 'file'; ">File</button>
+        <button (click)="child.type = 'folder'; ">Folder</button>
+      </div>
+
+      <!-- This is to add file/folder name using input -->
+      <div *ngIf="child.type && child.type !== 'unset' && !child.name" class="add-folder" [ngClass]="child.type">
+        <label>
+          <input type="text" [formControl]="folderName" />
+          <span *ngIf="folderName.invalid && folderName.touched && folderName.errors">Please input folder name</span>
+        </label>
+
+        <button class="btn black small" (click)="addName(child)">&#10004;</button>
+        <button class="btn white small" (click)="deleteChild(children, i)">&#10006;</button>
+      </div>
+
+      <app-tree-item [children]="child.children"></app-tree-item>
+    </li>
+</ul>

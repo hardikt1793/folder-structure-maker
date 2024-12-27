@@ -1,0 +1,20 @@
+<!-- Button for adding folder to the root -->
+<button class="btn black" (click)="showHideFolderSection = !showHideFolderSection">Add folder to root</button>
+
+<br>
+
+<br>
+
+<!-- Code of tree component for child element -->
+<app-tree-item [children]="folderStructureData"></app-tree-item>
+
+<!-- Code of Create folder name section -->
+<div *ngIf="showHideFolderSection" class="add-folder folder">
+  <label>
+    <input type="text" [formControl]="folderName" />
+    <span *ngIf="folderName.invalid && folderName.touched && folderName.errors">Please input folder name</span>
+  </label>
+
+  <button class="btn black small" (click)="addFolderToRoot()">&#10004;</button>
+  <button class="btn white small" (click)="showHideFolderSection = !showHideFolderSection">&#10006;</button>
+</div>
