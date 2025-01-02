@@ -10,7 +10,10 @@
 
 <br />
 <!-- Code of tree component for child element -->
-<app-tree-item [children]="folderStructureData"></app-tree-item>
+<app-tree-item
+  *ngIf="folderStructureData.length > 0"
+  [children]="folderStructureData"
+></app-tree-item>
 
 <!-- Code of Create folder name section -->
 <div *ngIf="showHideFolderSection" class="add-folder folder">

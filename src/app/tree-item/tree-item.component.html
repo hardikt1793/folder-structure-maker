@@ -1,7 +1,11 @@
 <ul *ngFor="let child of children; let i = index">
   <li>
     <!-- Display item and add or delete child item section -->
-    <div class="action" *ngIf="child.name" [ngClass]="child.type">
+    <div
+      class="action"
+      *ngIf="child.name"
+      [ngClass]="child.type ? child.type : ''"
+    >
       {{ child.name }}
 
       <button
@@ -42,6 +46,9 @@
       </button>
     </div>
 
-    <app-tree-item [children]="child.children"></app-tree-item>
+    <app-tree-item
+      *ngIf="child.children && child.children.length > 0"
+      [children]="child.children"
+    ></app-tree-item>
   </li>
 </ul>
